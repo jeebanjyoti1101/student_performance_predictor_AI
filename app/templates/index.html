@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='static.css') }}">
+</head>
+<body>
+    <div class="container">
+        <img src="{{ url_for('static', filename='images/ai_study_platform.png') }}" alt="AI Studying Platform" class="header-image">
+        <h2>📚 Student Performance Predictor</h2>
+
+        <form method="POST" action="/predict">
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required placeholder="Enter age">
+            </div>
+
+            <div class="form-group">
+                <label for="sex">Sex:</label>
+                <select id="sex" name="sex" required>
+                    <option value="0">Female</option>
+                    <option value="1">Male</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <select id="address" name="address" required>
+                    <option value="0">Urban</option>
+                    <option value="1">Rural</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="Medu">Mother's Education Level:</label>
+                <select id="Medu" name="Medu" required>
+                    <option value="0">None</option>
+                    <option value="1">Primary</option>
+                    <option value="2">Secondary</option>
+                    <option value="3">Higher Education</option>
+                    <option value="4">Postgraduate</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="Pjob">Parent's Job:</label>
+                <select id="Pjob" name="Pjob" required>
+                    <option value="at_home">At Home</option>
+                    <option value="health">Health Professional</option>
+                    <option value="other">Other</option>
+                    <option value="services">Service Worker</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="Dalc">Alcohol Consumption:</label>
+                <select id="Dalc" name="Dalc" required>
+                    <option value="1">Very Low</option>
+                    <option value="2">Low</option>
+                    <option value="3">Moderate</option>
+                    <option value="4">High</option>
+                    <option value="5">Very High</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="goout">Going Out Frequency:</label>
+                <select id="goout" name="goout" required>
+                    <option value="1">Very Low</option>
+                    <option value="2">Low</option>
+                    <option value="3">Moderate</option>
+                    <option value="4">High</option>
+                    <option value="5">Very High</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="studytime">Study Time (hours):</label>
+                <input type="number" id="studytime" name="studytime" min="0" max="5" required placeholder="0 to 5 hours">
+            </div>
+
+            <div class="form-group">
+                <label for="failures">Failures:</label>
+                <input type="number" id="failures" name="failures" min="0" max="5" required placeholder="Number of failures">
+            </div>
+
+            <div class="form-group">
+                <label for="G1">Grade 1 (G1):</label>
+                <input type="number" id="G1" name="G1" min="0" max="20" required placeholder="Grade out of 20">
+            </div>
+
+            <div class="form-group">
+                <label for="G2">Grade 2 (G2):</label>
+                <input type="number" id="G2" name="G2" min="0" max="20" required placeholder="Grade out of 20">
+            </div>
+
+            <div class="form-buttons">
+                <button type="submit">🎯 Predict</button>
+                <button type="reset">🧹 Reset</button>
+            </div>
+        </form>
+
+        {% if result %}
+        <div class="result">
+            <h3>Prediction Result:</h3>
+            <p>
+                {% if "Pass" in result %}
+                    <img src="{{ url_for('static', filename='images/happy.png') }}" alt="Happy" class="result-image">
+                    {{ result }}
+                {% else %}
+                    <img src="{{ url_for('static', filename='images/sad.png') }}" alt="Sad" class="result-image">
+                    {{ result }}
+                {% endif %}
+            </p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
